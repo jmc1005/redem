@@ -37,99 +37,106 @@ class _StartUpViewState extends State<StartUpView> {
       create: (_) => StartUpController(),
       child: Scaffold(
         body: SafeArea(
-          child: Center(
-            child: Builder(builder: (context) {
-              final controller = Provider.of<StartUpController>(context);
-              final language = LanguageTranslation.of(context)!;
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 30,
+              vertical: 10,
+            ),
+            child: Center(
+              child: Builder(builder: (context) {
+                final controller = Provider.of<StartUpController>(context);
+                final language = LanguageTranslation.of(context)!;
 
-              if (!hasInternet) {
-                final snackBar =
-                    SnackBar(content: Text(language.value('sin_conexion')));
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              }
+                if (!hasInternet) {
+                  final snackBar =
+                      SnackBar(content: Text(language.value('sin_conexion')));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
 
-              return Column(
-                children: [
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(30.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              StartUpLanguage(
-                                iconLabel: controller.iconLabel,
-                                controller: controller,
-                                onChanged: (iconLabel) {
-                                  setState(() {
-                                    controller.onIconLabelChanged(iconLabel);
-                                    onLocaleChange(Locale(iconLabel.value));
-                                  });
-                                },
-                              )
-                            ],
-                          ),
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Stack(
-                              alignment: Alignment.topCenter,
+                return Column(
+                  children: [
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(30.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                LogoWidget(
-                                  asset: 'assets/images/redem.png',
-                                  size: 150,
-                                ),
+                                StartUpLanguage(
+                                  iconLabel: controller.iconLabel,
+                                  controller: controller,
+                                  onChanged: (iconLabel) {
+                                    setState(() {
+                                      controller.onIconLabelChanged(iconLabel);
+                                      onLocaleChange(Locale(iconLabel.value));
+                                    });
+                                  },
+                                )
                               ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Column(
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Stack(
+                                alignment: Alignment.topCenter,
                                 children: [
-                                  Text(
-                                    language.value('bienvenido'),
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 30,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  const SizedBox(height: 20),
-                                  Text(
-                                    language.value('mensaje_bienvenida'),
-                                    textAlign: TextAlign.center,
+                                  LogoWidget(
+                                    asset: 'assets/images/redem.png',
+                                    size: 150,
                                   ),
                                 ],
                               ),
-                            ),
-                            const SizedBox(height: 20),
-                            ElevatedButton(
-                              onPressed: () {
-                                navigateTo(Routes.login, context);
-                              },
-                              child: Text(language.value('acceder')),
-                            ),
-                            const SizedBox(height: 20),
-                            Text(language.value('no_tienes_cuenta')),
-                            const SizedBox(height: 10),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.primary,
-                                  foregroundColor: Colors.white),
-                              onPressed: () {
-                                navigateTo(Routes.register, context);
-                              },
-                              child: Text(language.value('registrarse')),
-                            ),
-                          ],
-                        ),
-                      ],
+                              Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      language.value('bienvenido'),
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 30,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    const SizedBox(height: 20),
+                                    Text(
+                                      language.value('mensaje_bienvenida'),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              ElevatedButton(
+                                onPressed: () {
+                                  navigateTo(Routes.login, context);
+                                },
+                                child: Text(language.value('acceder')),
+                              ),
+                              const SizedBox(height: 20),
+                              Text(language.value('no_tienes_cuenta')),
+                              const SizedBox(height: 10),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  foregroundColor: AppColors.secondary,
+                                ),
+                                onPressed: () {
+                                  navigateTo(Routes.signUp, context);
+                                },
+                                child: Text(language.value('registrarse')),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              );
-            }),
+                  ],
+                );
+              }),
+            ),
           ),
         ),
       ),

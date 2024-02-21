@@ -4,6 +4,7 @@
   "acceder": "Login",
   "registrarse": "Sign up",
   "no_tienes_cuenta": "Do you have not an account?",
+  "tienes_cuenta": "Do you have an account?",
   "nombre": "First name",
   "apellido": "Last name",
   "fecha_nacimiento": "Date of birth",
@@ -16,5 +17,9 @@
   "sin_conexion": "Without connection",
   "perdiste_password": "Do not remember your password?",
   "datos_personales": "Personal data",
-  "patologia": "Pathology"
+  "patologia": "Pathology",
+  "confirmar_password": "Confirm password",
+  "password_no_coincide": "Password does not match",
+  "acceptar_terminos": "By creating the account, you are accepting our ",
+  "terminos_y_condiciones": "terms and conditions"
 }
