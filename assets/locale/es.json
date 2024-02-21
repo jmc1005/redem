@@ -4,6 +4,7 @@
   "acceder": "Acceder",
   "registrarse": "Registrarse",
   "no_tienes_cuenta": "¿No tienes cuenta?",
+  "tienes_cuenta": "¿Tienes cuenta?",
   "nombre": "Nombre",
   "apellido": "Apellido",
   "fecha_nacimiento": "Fecha de nacimiento",
@@ -16,5 +17,9 @@
   "sin_conexion": "Sin conexión",
   "perdiste_password": "¿Perdiste la contraseña?",
   "datos_personales": "Datos personales",
-  "patologia": "Patología"
+  "patologia": "Patología",
+  "confirmar_password": "Confirmar contraseña",
+  "password_no_coincide": "Las contraseñas no coinciden",
+  "acceptar_terminos": "Al crear tu cuenta, estas aceptando nuestros ",
+  "terminos_y_condiciones": "terminos y condiciones"
 }

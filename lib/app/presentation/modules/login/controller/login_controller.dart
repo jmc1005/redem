@@ -10,6 +10,7 @@ class LoginController extends StateNotifier<LoginState> {
   LoginController(super.state, {required this.userRepo});
 
   final UserRepo userRepo;
+
   void onEmailChanged(String text) {
     final email = text.trim().toLowerCase();
     onlyUpdate(state.copyWith(email: email));

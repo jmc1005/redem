@@ -56,7 +56,7 @@ class SubmitButton extends StatelessWidget {
     }
   }
 
-  mostrarError(BuildContext context, Exception exception) {
+  void mostrarError(BuildContext context, Exception exception) {
     final snackBar = SnackBar(content: Text(exception.toString()));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }

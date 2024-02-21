@@ -37,18 +37,18 @@ class LoginView extends StatelessWidget with ValidatorMixin {
                 return AbsorbPointer(
                   absorbing: controller.state.loading,
                   child: ListView(
-                    padding: const EdgeInsets.all(40),
+                    padding: const EdgeInsets.all(30),
                     children: [
                       const Stack(
                         alignment: Alignment.topCenter,
                         children: [
                           LogoWidget(
                             asset: 'assets/images/redem.png',
-                            size: 250,
+                            size: 100,
                           ),
                         ],
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 15),
                       TextFormField(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         onChanged: (value) {
