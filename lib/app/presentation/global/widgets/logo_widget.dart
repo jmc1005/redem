@@ -17,10 +17,13 @@ class LogoWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
-          height: size,
-          width: size,
-          child: Image.asset(asset),
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 30.0,
+            vertical: 5,
+          ),
+          width: MediaQuery.of(context).size.width,
+          height: 150,
         ),
       ],
     );
