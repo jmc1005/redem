@@ -1,0 +1,20 @@
+{
+  "bienvenido": "Bienvenido",
+  "mensaje_bienvenida": "EMUR te da la bienvenida a la primera aplicación móvil de Esclerósis Múltiple en Uruguay",
+  "acceder": "Acceder",
+  "registrarse": "Registrarse",
+  "no_tienes_cuenta": "¿No tienes cuenta?",
+  "nombre": "Nombre",
+  "apellido": "Apellido",
+  "fecha_nacimiento": "Fecha de nacimiento",
+  "sexo": "Género",
+  "ciudad": "Ciudad",
+  "pais": "País",
+  "tipo_usuario": "Tipo de usuario",
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "sin_conexion": "Sin conexión",
+  "perdiste_password": "¿Perdiste la contraseña?",
+  "datos_personales": "Datos personales",
+  "patologia": "Patología"
+}

@@ -1,0 +1,20 @@
+{
+  "bienvenido": "Welcome",
+  "mensaje_bienvenida": "EMUR welcomes you to the first Multiple Sclerosis mobile application in Uruguay",
+  "acceder": "Login",
+  "registrarse": "Sign up",
+  "no_tienes_cuenta": "Do you have not an account?",
+  "nombre": "First name",
+  "apellido": "Last name",
+  "fecha_nacimiento": "Date of birth",
+  "sexo": "Sex",
+  "ciudad": "City",
+  "pais": "Country",
+  "tipo_usuario": "User type",
+  "email": "Email",
+  "password": "Password",
+  "sin_conexion": "Without connection",
+  "perdiste_password": "Do not remember your password?",
+  "datos_personales": "Personal data",
+  "patologia": "Pathology"
+}
