@@ -118,7 +118,7 @@ class _StartUpViewState extends State<StartUpView> {
                                   backgroundColor: AppColors.primary,
                                   foregroundColor: Colors.white),
                               onPressed: () {
-                                navigateTo(Routes.home, context);
+                                navigateTo(Routes.register, context);
                               },
                               child: Text(language.value('registrarse')),
                             ),
