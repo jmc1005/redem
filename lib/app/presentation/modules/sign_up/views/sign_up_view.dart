@@ -29,6 +29,7 @@ class _SignUpViewState extends State<SignUpView> with ValidatorMixin {
       create: (_) => SignUpController(
         const SignUpState(),
         userRepo: context.read(),
+        context: context,
       ),
       child: Scaffold(
         body: SafeArea(
@@ -114,7 +115,7 @@ class _SignUpViewState extends State<SignUpView> with ValidatorMixin {
                         );
                       } else {
                         return ElevatedButton(
-                          onPressed: () => controller.submit(context),
+                          onPressed: () => controller.submit(),
                           child: Text(language.value('registrarse')),
                         );
                       }

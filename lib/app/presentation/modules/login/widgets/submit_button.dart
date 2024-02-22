@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../data/http/result.dart';
 import '../../../../domain/models/user/user.dart';
-import '../../../global/controllers/session_controller.dart';
+import '../../../global/controllers/session_user_controller.dart';
 import '../../../routes/app_routes.dart';
 import '../../../routes/routes.dart';
 import '../controller/login_controller.dart';
@@ -48,8 +48,8 @@ class SubmitButton extends StatelessWidget {
     };
 
     if (value is User) {
-      final SessionController sessionController = context.read();
-      sessionController.setUser(value);
+      final SessionUserController sessionController = context.read();
+      sessionController.user = value;
       navigateTo(Routes.home, context);
     } else if (value is Exception) {
       mostrarError(context, value);

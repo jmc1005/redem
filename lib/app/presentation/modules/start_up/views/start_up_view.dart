@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../../config/colors/app_colors.dart';
 import '../../../../domain/repository/connection_repo.dart';
 import '../../../../utils/locale/language_translation.dart';
+import '../../../global/controllers/session_lang_controller.dart';
 import '../../../global/widgets/logo_widget.dart';
 import '../../../routes/app_routes.dart';
 import '../../../routes/routes.dart';
@@ -59,7 +60,10 @@ class _StartUpViewState extends State<StartUpView> {
                       child: ListView(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(30.0),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0,
+                              vertical: 8,
+                            ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -69,6 +73,10 @@ class _StartUpViewState extends State<StartUpView> {
                                   onChanged: (iconLabel) {
                                     setState(() {
                                       controller.onIconLabelChanged(iconLabel);
+                                      final session = SessionLangController(
+                                        langCode: iconLabel.value,
+                                      );
+                                      session.langCode = iconLabel.value;
                                       onLocaleChange(Locale(iconLabel.value));
                                     });
                                   },
@@ -84,7 +92,7 @@ class _StartUpViewState extends State<StartUpView> {
                                 children: [
                                   LogoWidget(
                                     asset: 'assets/images/redem.png',
-                                    size: 150,
+                                    size: 120,
                                   ),
                                 ],
                               ),

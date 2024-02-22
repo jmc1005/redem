@@ -23,7 +23,7 @@ class LogoWidget extends StatelessWidget {
             vertical: 5,
           ),
           width: MediaQuery.of(context).size.width,
-          height: 150,
+          height: size,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(asset),

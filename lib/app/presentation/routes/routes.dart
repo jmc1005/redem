@@ -5,5 +5,5 @@ class Routes {
   static const signUp = '/sign-up';
   static const login = '/login';
   static const home = '/home';
-  static const register = '/register';
+  static const userDetail = '/user-detail';
 }
