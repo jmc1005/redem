@@ -4,16 +4,21 @@ import 'package:provider/provider.dart';
 import '../../../../data/http/result.dart';
 import '../../../../domain/models/user/user.dart';
 import '../../../../domain/repository/user_repo.dart';
-import '../../../global/controllers/session_controller.dart';
+import '../../../global/controllers/session_user_controller.dart';
+import '../../../global/controllers/state/user_credential_state.dart';
 import '../../../global/state_notifier.dart';
 import '../../../routes/app_routes.dart';
 import '../../../routes/routes.dart';
-import '../../start_up/controller/state/sign_up_state.dart';
 
-class SignUpController extends StateNotifier<SignUpState> {
-  SignUpController(super.state, {required this.userRepo});
+class SignUpController extends StateNotifier<UserCredentialState> {
+  SignUpController(
+    super.state, {
+    required this.userRepo,
+    required this.context,
+  });
 
   final UserRepo userRepo;
+  final BuildContext context;
 
   void onEmailChanged(String text) {
     final email = text.trim().toLowerCase();
@@ -25,26 +30,33 @@ class SignUpController extends StateNotifier<SignUpState> {
     onlyUpdate(state.copyWith(password: password));
   }
 
-  Future<void> submit(BuildContext context) async {
-    final UserRepo userRepo = context.read();
+  Future<void> submit() async {
+    state = state.copyWith(loading: true);
 
-    final result = await userRepo.signUp(state.email, state.password);
+    final result = await userRepo.signUp(
+      state.email,
+      state.password,
+    );
 
     final value = switch (result) {
-      Success(value: final user) => user,
       Failure(exception: final exception) => exception,
+      Success(value: final user) => user,
     };
 
     if (value is User) {
-      final SessionController sessionController = context.read();
-      sessionController.setUser(value);
-      navigateTo(Routes.register, context);
+      goTo(value);
     } else if (value is Exception) {
-      mostrarError(context, value);
+      mostrarError(value);
     }
   }
 
-  void mostrarError(BuildContext context, Exception exception) {
+  void goTo(User value) {
+    final SessionUserController sessionController = context.read();
+    sessionController.user = value;
+    navigateTo(Routes.userDetail, context);
+  }
+
+  void mostrarError(Exception exception) {
     final snackBar = SnackBar(content: Text(exception.toString()));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }

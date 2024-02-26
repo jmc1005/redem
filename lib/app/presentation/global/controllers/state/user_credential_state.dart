@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'sign_up_state.freezed.dart';
+part 'user_credential_state.freezed.dart';
 
 @freezed
-class SignUpState with _$SignUpState {
-  const factory SignUpState({
+class UserCredentialState with _$UserCredentialState {
+  const factory UserCredentialState({
     @Default('') String email,
     @Default('') String password,
     @Default(false) bool loading,
-  }) = _SignUpState;
+  }) = _UserCredentialState;
 }
