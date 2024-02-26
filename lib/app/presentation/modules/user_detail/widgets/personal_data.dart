@@ -27,7 +27,7 @@ class PersonalData extends StatelessWidget {
     return Column(
       children: [
         TextFormField(
-          key: const Key('registerFirstName'),
+          key: const Key('detailUserFirstName'),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             label: Text(language.value('nombre')),
@@ -35,7 +35,7 @@ class PersonalData extends StatelessWidget {
           initialValue: user.firstName,
         ),
         TextFormField(
-          key: const Key('registerLastName'),
+          key: const Key('detailUserLastName'),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             label: Text(language.value('apellido')),
@@ -50,7 +50,7 @@ class PersonalData extends StatelessWidget {
             dateInput!.text = DateFormat('dd-MM-yyyy').format(dateOfBirth);
 
             return TextFormField(
-              key: const Key('registerDateOfBirth'),
+              key: const Key('detailUserDateOfBirth'),
               controller: dateInput,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               keyboardType: TextInputType.datetime,
