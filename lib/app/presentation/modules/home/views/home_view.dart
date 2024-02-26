@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,10 +24,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final SessionUserController sessionController = context.read();
-    final user = sessionController.state!;
-
-    log(user.firstName);
+    final SessionUserController sessionUserController = context.read();
 
     return ChangeNotifierProvider<HomeController>(
       create: (_) => HomeController(),
@@ -54,7 +49,10 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  sessionUserController.signOut();
+                  navigateTo(Routes.startUp, context);
+                },
                 icon: const Icon(
                   Icons.logout,
                   color: Colors.white,

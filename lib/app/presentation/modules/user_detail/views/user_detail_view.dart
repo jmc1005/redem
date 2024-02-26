@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../utils/locale/language_translation.dart';
+import '../../../routes/app_routes.dart';
+import '../../../routes/routes.dart';
 import '../controller/user_detail_controller.dart';
 import '../widgets/accordion_widget.dart';
 
@@ -33,12 +35,20 @@ class _UserDetailViewState extends State<UserDetailView> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              'assets/images/redem_white.png',
+          leading: IconButton(
+            onPressed: () {
+              navigateTo(Routes.home, context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
             ),
           ),
+          title: Image.asset(
+            'assets/images/redem_white.png',
+            width: 56,
+          ),
+          centerTitle: true,
         ),
         body: Padding(
           padding: const EdgeInsets.all(30),
