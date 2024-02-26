@@ -32,12 +32,12 @@ class _HomeViewState extends State<HomeView> {
         final controller = Provider.of<HomeController>(context);
         return Scaffold(
           appBar: AppBar(
-            elevation: 0, // desactivar sombra appbar
-            titleTextStyle: const TextStyle(
-              color: Color.fromRGBO(255, 255, 255, 1),
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+            toolbarHeight: 80,
+            title: Image.asset(
+              'assets/images/redem_white.png',
+              width: 56,
             ),
+            centerTitle: true,
             actions: [
               IconButton(
                 onPressed: () {

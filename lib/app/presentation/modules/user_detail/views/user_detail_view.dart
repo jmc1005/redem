@@ -35,6 +35,7 @@ class _UserDetailViewState extends State<UserDetailView> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 80,
           leading: IconButton(
             onPressed: () {
               navigateTo(Routes.home, context);
