@@ -5,12 +5,12 @@ import '../../../../data/http/result.dart';
 import '../../../../domain/models/user/user.dart';
 import '../../../../domain/repository/user_repo.dart';
 import '../../../global/controllers/session_user_controller.dart';
+import '../../../global/controllers/state/user_credential_state.dart';
 import '../../../global/state_notifier.dart';
 import '../../../routes/app_routes.dart';
 import '../../../routes/routes.dart';
-import '../../start_up/controller/state/sign_up_state.dart';
 
-class SignUpController extends StateNotifier<SignUpState> {
+class SignUpController extends StateNotifier<UserCredentialState> {
   SignUpController(
     super.state, {
     required this.userRepo,
@@ -31,23 +31,26 @@ class SignUpController extends StateNotifier<SignUpState> {
   }
 
   Future<void> submit() async {
-    final UserRepo userRepo = context.read();
+    state = state.copyWith(loading: true);
 
-    final result = await userRepo.signUp(state.email, state.password);
+    final result = await userRepo.signUp(
+      state.email,
+      state.password,
+    );
 
     final value = switch (result) {
-      Success(value: final user) => user,
       Failure(exception: final exception) => exception,
+      Success(value: final user) => user,
     };
 
     if (value is User) {
-      goToRegister(value);
+      goTo(value);
     } else if (value is Exception) {
       mostrarError(value);
     }
   }
 
-  void goToRegister(User value) {
+  void goTo(User value) {
     final SessionUserController sessionController = context.read();
     sessionController.user = value;
     navigateTo(Routes.userDetail, context);

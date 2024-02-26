@@ -3,8 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../utils/locale/language_translation.dart';
-import '../../../global/controllers/session_lang_controller.dart';
-import '../controller/state/user_detail_state.dart';
 import '../controller/user_detail_controller.dart';
 import '../widgets/accordion_widget.dart';
 
@@ -26,47 +24,42 @@ class _UserDetailViewState extends State<UserDetailView> {
 
   @override
   Widget build(BuildContext context) {
-    final SessionLangController sessionLangController = context.read();
-    final scaffoldKey = GlobalKey<ScaffoldState>();
+    final controller = UserDetailController(
+      sessionLangController: context.read(),
+      sessionUserController: context.read(),
+    );
+    final language = LanguageTranslation.of(context)!;
 
-    return ChangeNotifierProvider<UserDetailController>(
-      create: (_) => UserDetailController(
-        const UserDetailState(),
-        sessionLangController: sessionLangController,
-      ),
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            leading: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset(
-                'assets/images/redem_white.png',
-              ),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/images/redem_white.png',
             ),
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(30),
-            child: Form(
-              child: Builder(builder: (context) {
-                final controller = Provider.of<UserDetailController>(context);
-                final language = LanguageTranslation.of(context)!;
-                return Column(
-                  children: [
-                    Expanded(
-                      child: AccordionWidget(
-                        controller: controller,
-                        language: language,
-                        dateInput: dateInput,
-                        onTap: () {
-                          openDatePicker(controller);
-                        },
-                      ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(30),
+          child: Builder(builder: (context) {
+            return Form(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: AccordionWidget(
+                      controller: controller,
+                      language: language,
+                      dateInput: dateInput,
+                      onTap: () {
+                        openDatePicker(controller);
+                      },
                     ),
-                  ],
-                );
-              }),
-            ),
-          ),
+                  ),
+                ],
+              ),
+            );
+          }),
         ),
       ),
     );

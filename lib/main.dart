@@ -44,9 +44,8 @@ void main() {
           create: (context) => SessionUserController(userRepo: context.read()),
         ),
         ChangeNotifierProvider<SessionLangController>(
-          create: (context) => SessionLangController(
-            langCode: const Locale('es').languageCode,
-          ),
+          create: (context) =>
+              SessionLangController(langCode: const Locale('es').languageCode),
         )
       ],
       child: const AppRedem(),

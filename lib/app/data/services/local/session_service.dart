@@ -8,7 +8,7 @@ class SessionService {
   final FlutterSecureStorage _flutterSecureStorage;
 
   Future<String?> get token async {
-    return await _flutterSecureStorage.read(key: _keyToken);
+    return _flutterSecureStorage.read(key: _keyToken);
   }
 
   Future<void> saveToken(String token) {

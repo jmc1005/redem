@@ -7,5 +7,6 @@ class SessionLangController extends StateNotifier<String> {
 
   set langCode(String lang) {
     state = lang;
+    onlyUpdate(state);
   }
 }

@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import '../../../../utils/enums/sex.dart';
 import '../../../../utils/enums/user_type.dart';
 import '../../../global/controllers/session_lang_controller.dart';
-import '../../../global/state_notifier.dart';
-import 'state/user_detail_state.dart';
+import '../../../global/controllers/session_user_controller.dart';
 
-class UserDetailController extends StateNotifier<UserDetailState> {
+class UserDetailController {
+  final SessionUserController sessionUserController;
   final SessionLangController sessionLangController;
 
-  UserDetailController(
-    super.state, {
+  UserDetailController({
+    required this.sessionUserController,
     required this.sessionLangController,
   });
 
@@ -39,22 +39,22 @@ class UserDetailController extends StateNotifier<UserDetailState> {
   }
 
   void onChangeValueFirstName(String text) {
-    onlyUpdate(state.copyWith(firstName: text.trim()));
+    // onlyUpdate(state.copyWith(firstName: text.trim()));
   }
 
   void onChangeValueLastName(String text) {
-    onlyUpdate(state.copyWith(firstName: text.trim()));
+    // onlyUpdate(state.copyWith(firstName: text.trim()));
   }
 
   void onChangeValueDateOfBirth(String text) {
-    onlyUpdate(state.copyWith(dateOfBirth: text.trim()));
+    // onlyUpdate(state.copyWith(dateOfBirth: text.trim()));
   }
 
   void onChangeValueSex(String text) {
-    onlyUpdate(state.copyWith(sex: text));
+    // onlyUpdate(state.copyWith(sex: text));
   }
 
   void onChangeValueType(String text) {
-    onlyUpdate(state.copyWith(userType: text));
+    // onlyUpdate(state.copyWith(userType: text));
   }
 }

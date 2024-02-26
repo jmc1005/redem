@@ -9,6 +9,7 @@ class SessionUserController extends StateNotifier<User?> {
 
   set user(User user) {
     state = user;
+    onlyUpdate(state);
   }
 
   Future<void> signOut() async {

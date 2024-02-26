@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../utils/enums/sex.dart';
 import '../../../../utils/enums/user_type.dart';
@@ -21,6 +22,8 @@ class PersonalData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = controller.sessionUserController.state!;
+
     return Column(
       children: [
         TextFormField(
@@ -29,7 +32,7 @@ class PersonalData extends StatelessWidget {
           decoration: InputDecoration(
             label: Text(language.value('nombre')),
           ),
-          initialValue: controller.state.firstName,
+          initialValue: user.firstName,
         ),
         TextFormField(
           key: const Key('registerLastName'),
@@ -37,13 +40,15 @@ class PersonalData extends StatelessWidget {
           decoration: InputDecoration(
             label: Text(language.value('apellido')),
           ),
-          initialValue: controller.state.lastName,
+          initialValue: user.lastName,
         ),
         Localizations.override(
           context: context,
           locale: Locale(controller.sessionLangController.langCode),
           child: Builder(builder: (context) {
-            dateInput!.text = controller.state.dateOfBirth;
+            final dateOfBirth = DateTime.parse(user.dateOfBirth);
+            dateInput!.text = DateFormat('dd-MM-yyyy').format(dateOfBirth);
+
             return TextFormField(
               key: const Key('registerDateOfBirth'),
               controller: dateInput,
@@ -64,8 +69,8 @@ class PersonalData extends StatelessWidget {
           }),
         ),
         DropdownButtonFormField(
-          value: controller.state.sex.trim() != ''
-              ? controller.state.sex
+          value: user.sex.toString().trim() != ''
+              ? user.sex.toString()
               : Sex.other.value,
           decoration: InputDecoration(
             label: Text(language.value('sexo')),

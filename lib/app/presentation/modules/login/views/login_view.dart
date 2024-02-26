@@ -3,12 +3,12 @@ import 'package:provider/provider.dart';
 
 import '../../../../utils/locale/language_translation.dart';
 import '../../../../utils/validators/validator_mixin.dart';
-import '../../../global/widgets/logo_widget.dart';
+import '../../../global/controllers/state/user_credential_state.dart';
+import '../../../global/widgets/user_credential_widget.dart';
+import '../../../global/widgets/user_submit_button_widget.dart';
 import '../../../routes/app_routes.dart';
 import '../../../routes/routes.dart';
 import '../controller/login_controller.dart';
-import '../controller/state/login_state.dart';
-import '../widgets/submit_button.dart';
 
 class LoginView extends StatelessWidget with ValidatorMixin {
   LoginView({super.key});
@@ -21,7 +21,8 @@ class LoginView extends StatelessWidget with ValidatorMixin {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<LoginController>(
       create: (_) => LoginController(
-        const LoginState(),
+        const UserCredentialState(),
+        context: context,
         userRepo: context.read(),
       ),
       child: Scaffold(
@@ -39,43 +40,20 @@ class LoginView extends StatelessWidget with ValidatorMixin {
                   child: ListView(
                     padding: const EdgeInsets.all(30),
                     children: [
-                      const Stack(
-                        alignment: Alignment.topCenter,
-                        children: [
-                          LogoWidget(
-                            asset: 'assets/images/redem.png',
-                            size: 100,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 15),
-                      TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        onChanged: (value) {
-                          controller.onEmailChanged(value);
+                      UserCredentialWidget(
+                        language: language,
+                        onChangedEmail: (text) {
+                          controller.onEmailChanged(text);
                         },
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          label: Text(language.value('email')),
-                        ),
-                        validator: emailValidator,
-                      ),
-                      const SizedBox(height: 15),
-                      TextFormField(
-                        controller: password,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        onChanged: (value) {
-                          controller.onPasswordChanged(value);
+                        onChangedPassword: (text) {
+                          controller.onPasswordChanged(text);
                         },
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          label: Text(language.value('password')),
-                        ),
-                        validator: passwordValidator,
-                        obscureText: true,
                       ),
-                      const SizedBox(height: 30),
-                      const SubmitButton(),
+                      UserSubmitButtonWidget(
+                        loading: controller.state.loading,
+                        label: language.value('acceder'),
+                        onPressed: controller.submit,
+                      ),
                       const SizedBox(height: 30),
                       GestureDetector(
                         child: Text(
