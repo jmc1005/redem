@@ -1,0 +1,47 @@
+\capitulo{4}{Técnicas y herramientas}
+\section{Scrum}
+Scrum es un marco que se emplea para la gestión de proyectos de metodología ágil y que facilita a los equipos la tarea de gestionar y estructurar el trabajo. Para ello, a través de iteraciones (sprints) se realiza una serie de tareas en un periodo de tiempo y se van incorporando al software.
+\section{Gitflow}
+\href{https://www.atlassian.com/es/git/tutorials/comparing-workflows/gitflow-workflow}{Gitflow} se define como un flujo de trabajo para la creación de ramas en Git y llevar un control de versiones. En este flujo existen dos ramas principales, master y develop, y otras ramas que pueden ayudarnos en nuestro desarrollo como pueden ser: feature, release o  hotfix.
+\section{Patrón de arquitectura MVVM}
+Es un patrón \href{https://learn.microsoft.com/es-es/dotnet/architecture/maui/mvvm}{MVVM}, también conocido como Model View ViewModel que se centra en separar la interfaz del usuario (View) de la parte lógica (Model). La interacción entre la parte lógica y la interfaz del usuario a través del recurso ViewModel.
+
+Algunas de las ventajas al usar este patrón son:
+\begin{itemize}
+\item Fácil desarrollo ya que al poder separar la vista de la lógica varios equipos pueden trabajar simultáneamente en varios componentes.
+\item Fácil testeo ya que no es necesario utilizar la vista para crear tests para el model o el viewmodel.
+\item Fácil mantenimiento ya que al realizar la separación de los componentes se crea un código simple y limpio.
+\end{itemize}
+
+Vamos a describir a continuación cada uno de los componentes que forman el MVVM:
+\begin{itemize}
+	\item Model: es el componente donde se encapsulan los datos de nuestra aplicación. En ella se pueden encontrar validación y lógica de negocio.
+	\item View: nos muestra el diseño y la apariencia de nuestra aplicación. En ella se verán los datos pero sin contener nada de la lógica de negocio.
+	\item ViewModel: es el componente que enlaza los datos o cambios de estado que puede tener nuestra aplicación.
+\end{itemize}
+
+\imagen{mvvm-pattern}{Arquitectura limpia}{.9}
+
+\section{Repositorio}
+Entre las herramientas consideradas \href{https://github.com/}{GitHub}, \href{https://bitbucket.org/}{Bitbucket}, \href{https://about.gitlab.com/}{GitLab} se decide utilizar GitHub, porque nos permite alojar proyectos gratuitamente. Además podemos crear documentación a través de wikis, crear tareas, sprints.
+Al crear el respositorio en GitHub podemos usar el gestor de proyecto que tiene a través de sus paneles y saber el estado en el que está cada issue (tarea).
+Otra de las ventajas que encontramos con GitHub es que está integrado en multiples servicios de integración continua.
+\section{Control de versiones}
+Al haber escogido como repositorio GitHub para alojar nuestro proyecto, utilizamos como control de versiones \href{https://git-scm.com/}{Git} que es un sistema distribuido que nos permite realizar nuestro trabajo sin conexión, es ligero y rápido.
+El crear ramas y hacer los merges es muy rápido y pocas veces se obtienen conflictos.
+El historial es muy detallado.
+\section{Gestión del proyecto}
+Como gestor de proyectos utilizamos el que viene integrado en GitHub. Con esta herramienta podemos gestionar nuestro proyecto y ver en que estado está cada tarea, incluso podemos darle prioridad.
+\section{Entorno de desarrollo integrado (IDE)}
+\subsection{Flutter}
+\subsection{Dart}
+\subsection{LaTeX}
+\subsection{Documentación}
+\section{Integración continua (CI)}
+\subsection{Cobertura de código}
+\subsection{Calidad de código}
+\section{Herramientas contrucción del proyecto}
+\subsection{Librerías}
+
+
+
