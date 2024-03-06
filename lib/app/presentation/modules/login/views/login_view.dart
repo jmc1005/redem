@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../utils/locale/language_translation.dart';
 import '../../../../utils/validators/validator_mixin.dart';
 import '../../../global/controllers/state/user_credential_state.dart';
 import '../../../global/widgets/user_credential_widget.dart';
@@ -33,7 +33,7 @@ class LoginView extends StatelessWidget with ValidatorMixin {
               key: _formKey,
               child: Builder(builder: (context) {
                 final controller = Provider.of<LoginController>(context);
-                final language = LanguageTranslation.of(context)!;
+                final language = AppLocalizations.of(context)!;
 
                 return AbsorbPointer(
                   absorbing: controller.state.loading,
@@ -41,7 +41,6 @@ class LoginView extends StatelessWidget with ValidatorMixin {
                     padding: const EdgeInsets.all(30),
                     children: [
                       UserCredentialWidget(
-                        language: language,
                         onChangedEmail: (text) {
                           controller.onEmailChanged(text);
                         },
@@ -51,13 +50,13 @@ class LoginView extends StatelessWidget with ValidatorMixin {
                       ),
                       UserSubmitButtonWidget(
                         loading: controller.state.loading,
-                        label: language.value('acceder'),
+                        label: language.acceder,
                         onPressed: controller.submit,
                       ),
                       const SizedBox(height: 30),
                       GestureDetector(
                         child: Text(
-                          language.value('perdiste_password'),
+                          language.perdiste_password,
                           style: const TextStyle(
                             color: Colors.blueAccent,
                             decoration: TextDecoration.underline,
@@ -68,12 +67,12 @@ class LoginView extends StatelessWidget with ValidatorMixin {
                       ),
                       const SizedBox(height: 30),
                       Text(
-                        language.value('no_tienes_cuenta'),
+                        language.no_tienes_cuenta,
                         textAlign: TextAlign.center,
                       ),
                       GestureDetector(
                         child: Text(
-                          language.value('no_tienes_cuenta'),
+                          language.no_tienes_cuenta,
                           style: const TextStyle(
                             color: Colors.blueAccent,
                             decoration: TextDecoration.underline,

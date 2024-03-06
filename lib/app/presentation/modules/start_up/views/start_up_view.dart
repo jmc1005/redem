@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../provider/locale_provider.dart';
 import '../../../../config/colors/app_colors.dart';
 import '../../../../domain/repository/connection_repo.dart';
-import '../../../../utils/locale/language_translation.dart';
-import '../../../global/controllers/session_lang_controller.dart';
 import '../../../global/widgets/logo_widget.dart';
 import '../../../routes/app_routes.dart';
 import '../../../routes/routes.dart';
@@ -46,11 +46,14 @@ class _StartUpViewState extends State<StartUpView> {
             child: Center(
               child: Builder(builder: (context) {
                 final controller = Provider.of<StartUpController>(context);
-                final language = LanguageTranslation.of(context)!;
+                final language = AppLocalizations.of(context)!;
 
                 if (!hasInternet) {
-                  final snackBar =
-                      SnackBar(content: Text(language.value('sin_conexion')));
+                  final snackBar = SnackBar(
+                    content: Text(
+                      language.sin_conexion,
+                    ),
+                  );
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }
 
@@ -73,11 +76,11 @@ class _StartUpViewState extends State<StartUpView> {
                                   onChanged: (iconLabel) {
                                     setState(() {
                                       controller.onIconLabelChanged(iconLabel);
-                                      final session = SessionLangController(
-                                        langCode: iconLabel.value,
-                                      );
-                                      session.langCode = iconLabel.value;
-                                      onLocaleChange(Locale(iconLabel.value));
+                                      context.read<LocaleProvider>().setLocale(
+                                            Locale(
+                                              iconLabel.value,
+                                            ),
+                                          );
                                     });
                                   },
                                 )
@@ -101,7 +104,7 @@ class _StartUpViewState extends State<StartUpView> {
                                 child: Column(
                                   children: [
                                     Text(
-                                      language.value('bienvenido'),
+                                      language.bienvenido,
                                       style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 30,
@@ -110,7 +113,7 @@ class _StartUpViewState extends State<StartUpView> {
                                     ),
                                     const SizedBox(height: 20),
                                     Text(
-                                      language.value('mensaje_bienvenida'),
+                                      language.mensaje_bienvenida,
                                       textAlign: TextAlign.center,
                                     ),
                                   ],
@@ -121,10 +124,10 @@ class _StartUpViewState extends State<StartUpView> {
                                 onPressed: () {
                                   navigateTo(Routes.login, context);
                                 },
-                                child: Text(language.value('acceder')),
+                                child: Text(language.acceder),
                               ),
                               const SizedBox(height: 20),
-                              Text(language.value('no_tienes_cuenta')),
+                              Text(language.no_tienes_cuenta),
                               const SizedBox(height: 10),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -134,7 +137,7 @@ class _StartUpViewState extends State<StartUpView> {
                                 onPressed: () {
                                   navigateTo(Routes.signUp, context);
                                 },
-                                child: Text(language.value('registrarse')),
+                                child: Text(language.registrarse),
                               ),
                             ],
                           ),
@@ -149,9 +152,5 @@ class _StartUpViewState extends State<StartUpView> {
         ),
       ),
     );
-  }
-
-  Future<void> onLocaleChange(Locale locale) async {
-    LanguageTranslation.load(locale);
   }
 }

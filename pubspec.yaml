@@ -53,6 +53,7 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
+
   googleapis: ^12.0.0
   split_view: ^3.2.1
 
@@ -73,15 +74,13 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
+  generate: true
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/redem.png
     - assets/images/redem_white.png
-
-    - assets/locale/es.json
-    - assets/locale/en.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

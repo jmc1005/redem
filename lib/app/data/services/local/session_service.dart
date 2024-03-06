@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const _keyToken = 'token';
+const _keyLocale = 'locale';
 
 class SessionService {
   SessionService(this._flutterSecureStorage);

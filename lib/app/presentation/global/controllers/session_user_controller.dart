@@ -3,7 +3,9 @@ import '../../../domain/repository/user_repo.dart';
 import '../state_notifier.dart';
 
 class SessionUserController extends StateNotifier<User?> {
-  SessionUserController({required this.userRepo}) : super(null);
+  SessionUserController({
+    required this.userRepo,
+  }) : super(null);
 
   final UserRepo userRepo;
 

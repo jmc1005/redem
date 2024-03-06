@@ -12,8 +12,8 @@ import 'app/data/services/remote/check_connection.dart';
 import 'app/data/services/remote/user_api.dart';
 import 'app/domain/repository/connection_repo.dart';
 import 'app/domain/repository/user_repo.dart';
-import 'app/presentation/global/controllers/session_lang_controller.dart';
 import 'app/presentation/global/controllers/session_user_controller.dart';
+import 'app/presentation/modules/start_up/controller/start_up_controller.dart';
 import 'app/utils/constants/app_constants.dart';
 import 'app_redem.dart';
 
@@ -40,13 +40,17 @@ void main() {
             sessionService,
           ),
         ),
-        ChangeNotifierProvider<SessionUserController>(
-          create: (context) => SessionUserController(userRepo: context.read()),
+        Provider<SessionService>(
+          create: (_) => sessionService,
         ),
-        ChangeNotifierProvider<SessionLangController>(
-          create: (context) =>
-              SessionLangController(langCode: const Locale('es').languageCode),
-        )
+        ChangeNotifierProvider<StartUpController>(
+          create: (context) => StartUpController(),
+        ),
+        ChangeNotifierProvider<SessionUserController>(
+          create: (context) => SessionUserController(
+            userRepo: context.read(),
+          ),
+        ),
       ],
       child: const AppRedem(),
     ),
