@@ -49,7 +49,7 @@ class _UserDetailViewState extends State<UserDetailView> {
             centerTitle: true,
           ),
           body: Padding(
-            padding: const EdgeInsets.all(30),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: Builder(builder: (context) {
               final UserDetailController userDetailController = context.read();
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../config/colors/app_colors.dart';
 import '../controller/user_detail_controller.dart';
 
 class StepperWidget extends StatefulWidget {
@@ -17,6 +18,13 @@ class _StepperWidgetState extends State<StepperWidget> {
   @override
   Widget build(BuildContext context) {
     return Stepper(
+      connectorColor: MaterialStateColor.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
+          return AppColors.primary;
+        }
+
+        return Colors.grey.shade400;
+      }),
       currentStep: currentStep,
       onStepCancel: () => currentStep == 0
           ? null

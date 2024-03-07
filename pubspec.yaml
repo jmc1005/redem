@@ -54,8 +54,10 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  googleapis: ^12.0.0
+  googleapis: ^13.0.0
   split_view: ^3.2.1
+  csc_picker: ^0.2.7
+  flutter_custom_selector: ^0.0.3
 
 dev_dependencies:
   flutter_test:

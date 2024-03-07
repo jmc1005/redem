@@ -5,8 +5,9 @@ import 'package:intl/intl.dart';
 import '../../../../utils/enums/sex.dart';
 import '../../../../utils/enums/user_type.dart';
 import '../controller/user_detail_controller.dart';
+import 'csc_widget.dart';
 
-class PersonalData extends StatelessWidget {
+class PersonalData extends StatefulWidget {
   const PersonalData({
     super.key,
     required this.userDetailController,
@@ -15,9 +16,18 @@ class PersonalData extends StatelessWidget {
   final UserDetailController userDetailController;
 
   @override
+  State<PersonalData> createState() => _PersonalDataState();
+}
+
+class _PersonalDataState extends State<PersonalData> {
+  String countryValue = '';
+
+  @override
   Widget build(BuildContext context) {
-    final user = userDetailController.sessionUserController.state!;
-    final context = userDetailController.context;
+    final sessionUserController =
+        widget.userDetailController.sessionUserController;
+    final user = widget.userDetailController.sessionUserController.state!;
+    final context = widget.userDetailController.context;
     final dateInput = TextEditingController();
     final language = AppLocalizations.of(context)!;
 
@@ -59,7 +69,7 @@ class PersonalData extends StatelessWidget {
               ),
             ),
             onTap: () =>
-                userDetailController.openDatePicker(context, dateInput),
+                widget.userDetailController.openDatePicker(context, dateInput),
           );
         }),
         DropdownButtonFormField(
@@ -69,25 +79,29 @@ class PersonalData extends StatelessWidget {
           decoration: InputDecoration(
             label: Text(language.sexo),
           ),
-          items: userDetailController.sexList,
+          items: widget.userDetailController.sexList,
           onChanged: (value) {
             if (value != null) {
-              userDetailController.onChangeValueSex(value);
+              widget.userDetailController.onChangeValueSex(value);
             }
           },
         ),
         DropdownButtonFormField(
-          value: UserType.other.value,
+          value: UserType.patient.value,
           decoration: InputDecoration(
             label: Text(language.tipo_usuario),
           ),
-          items: userDetailController.typeList,
+          items: widget.userDetailController.typeList,
           onChanged: (value) {
             if (value != null) {
-              userDetailController.onChangeValueType(value);
+              widget.userDetailController.onChangeValueType(value);
             }
           },
-        )
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        CSCWidget(sessionUserController: sessionUserController)
       ],
     );
   }

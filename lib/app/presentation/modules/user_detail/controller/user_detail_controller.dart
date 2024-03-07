@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../../../../utils/enums/sex.dart';
 import '../../../../utils/enums/user_type.dart';
 import '../../../global/controllers/session_user_controller.dart';
+import '../widgets/pathology_data.dart';
 import '../widgets/personal_data.dart';
 
 class UserDetailController extends foundation.ChangeNotifier {
@@ -31,45 +32,60 @@ class UserDetailController extends foundation.ChangeNotifier {
     ).toList();
   }
 
+  String getEnumSextring(Sex enumValue, AppLocalizations language) {
+    switch (enumValue) {
+      case Sex.male:
+        return language.cuidador;
+      case Sex.female:
+        return language.paciente;
+      case Sex.other:
+        return language.doctor;
+    }
+  }
+
   List<DropdownMenuItem<String>> get typeList {
+    final language = AppLocalizations.of(context)!;
     return UserType.values.map<DropdownMenuItem<String>>(
       (UserType type) {
+        final label = getEnumTypeString(type, language);
         return DropdownMenuItem<String>(
           value: type.value,
           alignment: Alignment.centerLeft,
-          child: Text(type.label),
+          child: Text(label),
         );
       },
     ).toList();
   }
 
+  String getEnumTypeString(UserType enumValue, AppLocalizations language) {
+    switch (enumValue) {
+      case UserType.caregiver:
+        return language.cuidador;
+      case UserType.patient:
+        return language.paciente;
+      case UserType.doctor:
+        return language.doctor;
+    }
+  }
+
   List<Step> get steps {
+    final language = AppLocalizations.of(context)!;
+
     return <Step>[
       Step(
         state: currentStep > 0 ? StepState.complete : StepState.indexed,
         isActive: currentStep >= 0,
-        title: const Text('Account Info'),
+        title: Text(language.datos_personales),
         content: PersonalData(
           userDetailController: this,
         ),
       ),
-      // Step(
-      //   state: currentStep > 1 ? StepState.complete : StepState.indexed,
-      //   isActive: currentStep >= 1,
-      //   title: const Text('Address'),
-      //   content: Column(
-      //     children: const [
-      //       CustomInput(
-      //         hint: 'City and State',
-      //         inputBorder: OutlineInputBorder(),
-      //       ),
-      //       CustomInput(
-      //         hint: 'Postal Code',
-      //         inputBorder: OutlineInputBorder(),
-      //       ),
-      //     ],
-      //   ),
-      // ),
+      Step(
+        state: currentStep > 1 ? StepState.complete : StepState.indexed,
+        isActive: currentStep >= 1,
+        title: Text(language.patologia),
+        content: const PathologyData(),
+      ),
     ];
   }
 

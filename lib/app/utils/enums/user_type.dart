@@ -1,9 +1,7 @@
 enum UserType {
   patient('patient', 'Paciente'),
   caregiver('caregiver', 'Cuidador'),
-  professional('professional', 'Profesional'),
-  other('other', '--'),
-  ;
+  doctor('doctor', 'Profesional');
 
   const UserType(this.value, this.label);
 

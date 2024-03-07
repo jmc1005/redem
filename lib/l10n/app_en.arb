@@ -21,5 +21,12 @@
   "confirmar_password": "Confirm password",
   "password_no_coincide": "Password does not match",
   "acceptar_terminos": "By creating the account, you are accepting our ",
-  "terminos_y_condiciones": "terms and conditions"
+  "terminos_y_condiciones": "terms and conditions",
+  "recordatorio": "Reminder",
+  "cuidador": "Caregiver",
+  "doctor": "Doctor",
+  "paciente": "Patient",
+  "hombre": "Male",
+  "mujer": "Female",
+  "otro": "Other"
 }
