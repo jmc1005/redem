@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../utils/locale/language_translation.dart';
 import '../../../../utils/validators/validator_mixin.dart';
 import '../../../global/controllers/state/user_credential_state.dart';
 import '../../../global/widgets/user_credential_widget.dart';
@@ -36,7 +36,7 @@ class _SignUpViewState extends State<SignUpView> with ValidatorMixin {
             key: _formKey,
             child: Builder(builder: (context) {
               final controller = Provider.of<SignUpController>(context);
-              final language = LanguageTranslation.of(context)!;
+              final language = AppLocalizations.of(context)!;
 
               return AbsorbPointer(
                 absorbing: controller.state.loading,
@@ -44,7 +44,6 @@ class _SignUpViewState extends State<SignUpView> with ValidatorMixin {
                   padding: const EdgeInsets.all(30),
                   children: [
                     UserCredentialWidget(
-                      language: language,
                       onChangedEmail: (text) {
                         controller.onEmailChanged(text);
                       },
@@ -60,7 +59,7 @@ class _SignUpViewState extends State<SignUpView> with ValidatorMixin {
                       },
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
-                        label: Text(language.value('confirmar_password')),
+                        label: Text(language.confirmar_password),
                       ),
                       validator: (value) {
                         final validPassword = passwordValidator(value);
@@ -68,7 +67,7 @@ class _SignUpViewState extends State<SignUpView> with ValidatorMixin {
 
                         if (validPassword == null) {
                           if (password != confirmpassword.text) {
-                            return language.value('password_no_coincide');
+                            return language.password_no_coincide;
                           }
                         }
 
@@ -79,7 +78,7 @@ class _SignUpViewState extends State<SignUpView> with ValidatorMixin {
                     const SizedBox(height: 30),
                     UserSubmitButtonWidget(
                       loading: controller.state.loading,
-                      label: language.value('registrarse'),
+                      label: language.registrarse,
                       onPressed: controller.submit,
                     ),
                     const SizedBox(height: 15),
@@ -88,13 +87,13 @@ class _SignUpViewState extends State<SignUpView> with ValidatorMixin {
                       child: Wrap(
                         alignment: WrapAlignment.center,
                         children: [
-                          Text(language.value('acceptar_terminos')),
+                          Text(language.acceptar_terminos),
                           const SizedBox(
                             width: 5,
                           ),
                           GestureDetector(
                             child: Text(
-                              language.value('terminos_y_condiciones'),
+                              language.terminos_y_condiciones,
                               style: const TextStyle(
                                 color: Colors.blueAccent,
                                 decoration: TextDecoration.underline,
@@ -107,11 +106,10 @@ class _SignUpViewState extends State<SignUpView> with ValidatorMixin {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    Text(language.value('tienes_cuenta'),
-                        textAlign: TextAlign.center),
+                    Text(language.tienes_cuenta, textAlign: TextAlign.center),
                     GestureDetector(
                       child: Text(
-                        language.value('acceder'),
+                        language.acceder,
                         style: const TextStyle(
                           color: Colors.blueAccent,
                           decoration: TextDecoration.underline,

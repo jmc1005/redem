@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../utils/enums/sex.dart';
 import '../../../../utils/enums/user_type.dart';
-import '../../../../utils/locale/language_translation.dart';
 import '../controller/user_detail_controller.dart';
+import 'csc_widget.dart';
 
-class PersonalData extends StatelessWidget {
+class PersonalData extends StatefulWidget {
   const PersonalData({
     super.key,
-    required this.controller,
-    required this.language,
-    required this.onTap,
-    required this.dateInput,
+    required this.userDetailController,
   });
 
-  final UserDetailController controller;
-  final LanguageTranslation language;
-  final Function() onTap;
-  final TextEditingController? dateInput;
+  final UserDetailController userDetailController;
+
+  @override
+  State<PersonalData> createState() => _PersonalDataState();
+}
+
+class _PersonalDataState extends State<PersonalData> {
+  String countryValue = '';
 
   @override
   Widget build(BuildContext context) {
-    final user = controller.sessionUserController.state!;
+    final sessionUserController =
+        widget.userDetailController.sessionUserController;
+    final user = widget.userDetailController.sessionUserController.state!;
+    final context = widget.userDetailController.context;
+    final dateInput = TextEditingController();
+    final language = AppLocalizations.of(context)!;
 
     return Column(
       children: [
@@ -30,7 +37,7 @@ class PersonalData extends StatelessWidget {
           key: const Key('detailUserFirstName'),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
-            label: Text(language.value('nombre')),
+            label: Text(language.nombre),
           ),
           initialValue: user.firstName,
         ),
@@ -38,62 +45,63 @@ class PersonalData extends StatelessWidget {
           key: const Key('detailUserLastName'),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
-            label: Text(language.value('apellido')),
+            label: Text(language.apellido),
           ),
           initialValue: user.lastName,
         ),
-        Localizations.override(
-          context: context,
-          locale: Locale(controller.sessionLangController.langCode),
-          child: Builder(builder: (context) {
-            final dateOfBirth = DateTime.parse(user.dateOfBirth);
-            dateInput!.text = DateFormat('dd-MM-yyyy').format(dateOfBirth);
+        Builder(builder: (_) {
+          final dateOfBirth = DateTime.parse(user.dateOfBirth);
+          dateInput.text = DateFormat('dd-MM-yyyy').format(dateOfBirth);
 
-            return TextFormField(
-              key: const Key('detailUserDateOfBirth'),
-              controller: dateInput,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              keyboardType: TextInputType.datetime,
-              decoration: InputDecoration(
-                label: Text(language.value('fecha_nacimiento')),
-                suffixIcon: const Align(
-                  widthFactor: 1.0,
-                  heightFactor: 1.0,
-                  child: Icon(
-                    Icons.calendar_today,
-                  ),
+          return TextFormField(
+            key: const Key('detailUserDateOfBirth'),
+            controller: dateInput,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: TextInputType.datetime,
+            decoration: InputDecoration(
+              label: Text(language.fecha_nacimiento),
+              suffixIcon: const Align(
+                widthFactor: 1.0,
+                heightFactor: 1.0,
+                child: Icon(
+                  Icons.calendar_today,
                 ),
               ),
-              onTap: onTap,
-            );
-          }),
-        ),
+            ),
+            onTap: () =>
+                widget.userDetailController.openDatePicker(context, dateInput),
+          );
+        }),
         DropdownButtonFormField(
           value: user.sex.toString().trim() != ''
               ? user.sex.toString()
               : Sex.other.value,
           decoration: InputDecoration(
-            label: Text(language.value('sexo')),
+            label: Text(language.sexo),
           ),
-          items: controller.sexList,
+          items: widget.userDetailController.sexList,
           onChanged: (value) {
             if (value != null) {
-              controller.onChangeValueSex(value);
+              widget.userDetailController.onChangeValueSex(value);
             }
           },
         ),
         DropdownButtonFormField(
-          value: UserType.other.value,
+          value: UserType.patient.value,
           decoration: InputDecoration(
-            label: Text(language.value('tipo_usuario')),
+            label: Text(language.tipo_usuario),
           ),
-          items: controller.typeList,
+          items: widget.userDetailController.typeList,
           onChanged: (value) {
             if (value != null) {
-              controller.onChangeValueType(value);
+              widget.userDetailController.onChangeValueType(value);
             }
           },
-        )
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        CSCWidget(sessionUserController: sessionUserController)
       ],
     );
   }

@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../utils/locale/language_translation.dart';
 import '../../../utils/validators/validator_mixin.dart';
 import 'logo_widget.dart';
 
 class UserCredentialWidget extends StatelessWidget with ValidatorMixin {
   UserCredentialWidget({
     super.key,
-    required this.language,
     required this.onChangedEmail,
     required this.onChangedPassword,
   });
 
-  final LanguageTranslation language;
   final Function(String)? onChangedEmail;
   final Function(String)? onChangedPassword;
 
   @override
   Widget build(BuildContext context) {
+    final language = AppLocalizations.of(context)!;
+
     return Column(
       children: [
         const Stack(
@@ -35,7 +35,7 @@ class UserCredentialWidget extends StatelessWidget with ValidatorMixin {
           onChanged: onChangedEmail,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            label: Text(language.value('email')),
+            label: Text(language.email),
           ),
           validator: emailValidator,
         ),
@@ -45,7 +45,7 @@ class UserCredentialWidget extends StatelessWidget with ValidatorMixin {
           onChanged: onChangedPassword,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
-            label: Text(language.value('password')),
+            label: Text(language.password),
           ),
           validator: passwordValidator,
           obscureText: true,

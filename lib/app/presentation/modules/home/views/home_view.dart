@@ -5,9 +5,9 @@ import '../../../global/controllers/session_user_controller.dart';
 import '../../../routes/app_routes.dart';
 import '../../../routes/routes.dart';
 import '../controller/home_controller.dart';
-import '../widgets/article_list.dart';
 import '../widgets/bottom_nav_bar.dart';
-import '../widgets/floating_expand_menu.dart';
+import '../widgets/central_panel_widget.dart';
+import '../widgets/reminder_widget.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -31,6 +31,7 @@ class _HomeViewState extends State<HomeView> {
       child: Builder(builder: (context) {
         final controller = Provider.of<HomeController>(context);
         return Scaffold(
+          backgroundColor: Colors.grey.shade100,
           appBar: AppBar(
             toolbarHeight: 80,
             title: Image.asset(
@@ -60,10 +61,10 @@ class _HomeViewState extends State<HomeView> {
               ),
             ],
           ),
-          floatingActionButton: FloatingExpandMenu(
-            distance: 100,
-            children: controller.actionButtonList,
-          ),
+          // floatingActionButton: FloatingExpandMenu(
+          //   distance: 100,
+          //   children: controller.actionButtonList,
+          // ),
           bottomNavigationBar: BottomNavBar(
             onTap: (index) {
               //print(index);
@@ -72,7 +73,15 @@ class _HomeViewState extends State<HomeView> {
             controller: controller,
           ),
           body: const SafeArea(
-            child: ArticleList(),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ReminderWidget(),
+                  CentralPanelWidget(),
+                ],
+              ),
+            ),
           ),
         );
       }),

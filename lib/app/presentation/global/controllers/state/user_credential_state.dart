@@ -8,5 +8,6 @@ class UserCredentialState with _$UserCredentialState {
     @Default('') String email,
     @Default('') String password,
     @Default(false) bool loading,
+    @Default('es') String locale,
   }) = _UserCredentialState;
 }

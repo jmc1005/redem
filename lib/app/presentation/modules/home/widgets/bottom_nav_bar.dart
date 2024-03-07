@@ -18,12 +18,12 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BorderBottomNavigationBar(
       height: 53,
-      borderRadiusValue: 16,
+      borderRadiusValue: 8,
       selectedLabelColor: Colors.white,
-      unselectedLabelColor: Colors.grey,
+      unselectedLabelColor: Colors.white,
       selectedBackgroundColor: AppColors.primary,
-      unselectedBackgroundColor: Colors.grey[200]!,
-      unselectedIconColor: Colors.grey[600]!,
+      unselectedBackgroundColor: Colors.white,
+      unselectedIconColor: Colors.black54,
       selectedIconColor: Colors.white,
       onTap: onTap,
       currentIndex: controller.currentIndex,
@@ -32,10 +32,10 @@ class BottomNavBar extends StatelessWidget {
           icon: Icons.home,
         ),
         BorderBottomNavigationItems(
-          icon: Icons.alarm_sharp,
+          icon: Icons.monitor,
         ),
         BorderBottomNavigationItems(
-          icon: Icons.health_and_safety_outlined,
+          icon: Icons.person,
         ),
         BorderBottomNavigationItems(
           icon: Icons.medical_services_outlined,
