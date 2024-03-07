@@ -1,10 +1,12 @@
 \capitulo{4}{Técnicas y herramientas}
-\section{Scrum}
-Scrum es un marco que se emplea para la gestión de proyectos de metodología ágil y que facilita a los equipos la tarea de gestionar y estructurar el trabajo. Para ello, a través de iteraciones (sprints) se realiza una serie de tareas en un periodo de tiempo y se van incorporando al software.
-\section{Gitflow}
-\href{https://www.atlassian.com/es/git/tutorials/comparing-workflows/gitflow-workflow}{Gitflow} se define como un flujo de trabajo para la creación de ramas en Git y llevar un control de versiones. En este flujo existen dos ramas principales, master y develop, y otras ramas que pueden ayudarnos en nuestro desarrollo como pueden ser: feature, release o  hotfix.
-\section{Patrón de arquitectura MVVM}
-Es un patrón \href{https://learn.microsoft.com/es-es/dotnet/architecture/maui/mvvm}{MVVM}, también conocido como Model View ViewModel que se centra en separar la interfaz del usuario (View) de la parte lógica (Model). La interacción entre la parte lógica y la interfaz del usuario a través del recurso ViewModel.
+\section{Metodologías}
+\subsection{Scrum}
+Scrum~\cite{wiki:scrum} es un marco que se emplea para la gestión de proyectos de metodología ágil y que facilita a los equipos la tarea de gestionar y estructurar el trabajo. Para ello, a través de iteraciones (sprints) se realiza una serie de tareas en un periodo de tiempo y se van incorporando al software.
+\subsection{Gitflow}
+Gitflow~\cite{gitflow} se define como un flujo de trabajo para la creación de ramas en Git y llevar un control de versiones. En este flujo existen dos ramas principales, master y develop, y otras ramas que pueden ayudarnos en nuestro desarrollo como pueden ser: feature, release o  hotfix.
+\section{Patrón de diseño}
+\subsection{Model-View-ViewModel MVVM}
+Es un patrón MVVM~\cite{mvvm}, también conocido como Model View ViewModel que se centra en separar la interfaz del usuario (View) de la parte lógica (Model). La interacción entre la parte lógica y la interfaz del usuario a través del recurso ViewModel.
 
 Algunas de las ventajas al usar este patrón son:
 \begin{itemize}
@@ -23,23 +25,33 @@ Vamos a describir a continuación cada uno de los componentes que forman el MVVM
 \imagen{mvvm-pattern}{Arquitectura limpia}{.9}
 
 \section{Repositorio}
-Entre las herramientas consideradas \href{https://github.com/}{GitHub}, \href{https://bitbucket.org/}{Bitbucket}, \href{https://about.gitlab.com/}{GitLab} se decide utilizar GitHub, porque nos permite alojar proyectos gratuitamente. Además podemos crear documentación a través de wikis, crear tareas, sprints.
+Entre las herramientas consideradas GitHub~\cite{github}, Bitbucket~\cite{bitbucket}, GitLab~\cite{wiki:gitlab} se decide utilizar GitHub, porque nos permite alojar proyectos gratuitamente. Además podemos crear documentación a través de wikis, crear tareas, sprints.
 Al crear el respositorio en GitHub podemos usar el gestor de proyecto que tiene a través de sus paneles y saber el estado en el que está cada issue (tarea).
 Otra de las ventajas que encontramos con GitHub es que está integrado en multiples servicios de integración continua.
 \section{Control de versiones}
-Al haber escogido como repositorio GitHub para alojar nuestro proyecto, utilizamos como control de versiones \href{https://git-scm.com/}{Git} que es un sistema distribuido que nos permite realizar nuestro trabajo sin conexión, es ligero y rápido.
+Al haber escogido como repositorio GitHub para alojar nuestro proyecto, utilizamos como control de versiones Git~\cite{wiki:git} que es un sistema distribuido que nos permite realizar nuestro trabajo sin conexión, es ligero y rápido.
 El crear ramas y hacer los merges es muy rápido y pocas veces se obtienen conflictos.
 El historial es muy detallado.
 \section{Gestión del proyecto}
 Como gestor de proyectos utilizamos el que viene integrado en GitHub. Con esta herramienta podemos gestionar nuestro proyecto y ver en que estado está cada tarea, incluso podemos darle prioridad.
 \section{Entorno de desarrollo integrado (IDE)}
 \subsection{Flutter}
+Flutter~\cite{flutter} es un SDK (Kit de Desarrollo de Software) desarrollado por Google que nos permite crear aplicaciones para varios dispositivos. Hemos elegido esta herramienta porque nos permite crear aplicaciones multiplataforma.
+Entre alguna de las ventajas destacamos:
+\begin{itemize}
+\item \textbf{Compila en nativo} tanto para Android como iOS.
+\item Mediante el uso de widgets, se pueden \textbf{crear interfaces gráficas flexibles}.
+\item \textbf{Rapidez} en el desarrollo.
+\end{itemize}
 \subsection{Dart}
+Dart~\cite{dart} es un \textbf{lenguaje de programación moderno}, desarrollado por Google, donde se mezcla la programación orientada a objetos POO con los lenguajes de programación basados en scripts.
+\subsection{FlutterFlow}
+FlutterFlow~\cite{flutterflow} es una herramienta que nos permite crear aplicaciones insertando los componentes que tiene la herramienta, arrastrando y soltando. Es posible añadir lógica durante la creación de las páginas.
 \subsection{LaTeX}
 \subsection{Documentación}
-\section{Integración continua (CI)}
-\subsection{Cobertura de código}
-\subsection{Calidad de código}
+\section{Integración y entregas continuas (CI/CD)}
+\subsection{Codemagic}
+Codemagic~\cite{codemagic} es producto basado en la nube que permite realizar integración y entregas continuas. Te permite crear workflow versátiles y activar la compilación,  análisis de código y pruebas de manera automática.
 \section{Herramientas contrucción del proyecto}
 \subsection{Librerías}
 
