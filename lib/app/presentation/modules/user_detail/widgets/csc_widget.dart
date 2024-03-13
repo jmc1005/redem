@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -21,7 +22,11 @@ class _CSCWidgetState extends State<CSCWidget> {
   @override
   Widget build(BuildContext context) {
     final language = AppLocalizations.of(context)!;
-    final state = widget.sessionUserController?.state;
+    final controller = widget.sessionUserController;
+    final state = controller?.state;
+
+    countryValue = state?.country ?? '';
+    stateValue = state?.city ?? '';
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -80,12 +85,16 @@ class _CSCWidgetState extends State<CSCWidget> {
         onCountryChanged: (value) {
           setState(() {
             countryValue = value;
+            final user = state!.copyWith(country: countryValue);
+            controller?.user = user;
           });
         },
 
         onStateChanged: (value) {
           setState(() {
             stateValue = value ?? '';
+            final user = state!.copyWith(city: stateValue);
+            controller?.user = user;
           });
         },
 

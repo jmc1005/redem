@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../global/controllers/session_symptom_controller.dart';
 import '../../../global/controllers/session_user_controller.dart';
 import '../../../routes/app_routes.dart';
 import '../../../routes/routes.dart';
@@ -23,12 +24,16 @@ class _UserDetailViewState extends State<UserDetailView> {
   @override
   Widget build(BuildContext context) {
     final SessionUserController sessionUserController = context.read();
+    final SessionSymptomController sessionSymptomController = context.read();
 
     return ChangeNotifierProvider<UserDetailController>(
       create: (_) => UserDetailController(
           context: context,
           sessionUserController: sessionUserController,
-          currentStep: 0),
+          sessionSymptomController: sessionSymptomController,
+          currentStep: 0,
+          selectedSymptoms: [],
+          deleteSymptoms: []),
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -49,20 +54,18 @@ class _UserDetailViewState extends State<UserDetailView> {
             centerTitle: true,
           ),
           body: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Builder(builder: (context) {
               final UserDetailController userDetailController = context.read();
 
-              return Form(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: StepperWidget(
-                        userDetailController: userDetailController,
-                      ),
+              return Column(
+                children: [
+                  Expanded(
+                    child: StepperWidget(
+                      userDetailController: userDetailController,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               );
             }),
           ),

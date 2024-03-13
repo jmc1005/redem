@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../utils/enums/sex.dart';
 import '../../../../utils/enums/user_type.dart';
+import '../../../../utils/validators/validator_mixin.dart';
 import '../controller/user_detail_controller.dart';
 import 'csc_widget.dart';
 
@@ -19,7 +20,7 @@ class PersonalData extends StatefulWidget {
   State<PersonalData> createState() => _PersonalDataState();
 }
 
-class _PersonalDataState extends State<PersonalData> {
+class _PersonalDataState extends State<PersonalData> with ValidatorMixin {
   String countryValue = '';
 
   @override
@@ -40,6 +41,9 @@ class _PersonalDataState extends State<PersonalData> {
             label: Text(language.nombre),
           ),
           initialValue: user.firstName,
+          onChanged: (value) {
+            widget.userDetailController.onChangeValueFirstName(value);
+          },
         ),
         TextFormField(
           key: const Key('detailUserLastName'),
@@ -48,6 +52,21 @@ class _PersonalDataState extends State<PersonalData> {
             label: Text(language.apellido),
           ),
           initialValue: user.lastName,
+          onChanged: (value) {
+            widget.userDetailController.onChangeValueLastName(value);
+          },
+        ),
+        TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          keyboardType: TextInputType.emailAddress,
+          initialValue: user.email,
+          decoration: InputDecoration(
+            label: Text(language.email),
+          ),
+          onChanged: (value) {
+            widget.userDetailController.onChangeValueEmail(value);
+          },
+          validator: emailValidator,
         ),
         Builder(builder: (_) {
           final dateOfBirth = DateTime.parse(user.dateOfBirth);

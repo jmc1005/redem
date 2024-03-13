@@ -28,6 +28,13 @@ class AppTheme {
           ),
         ),
       ),
+      scaffoldBackgroundColor: Colors.white,
+      primarySwatch: AppColors.from(AppColors.secondary),
+      colorScheme: ColorScheme.fromSwatch(
+        primarySwatch: AppColors.from(AppColors.secondary),
+        accentColor: const Color.fromARGB(255, 205, 62, 22),
+        backgroundColor: Colors.white,
+      ),
     );
   }
 }

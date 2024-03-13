@@ -40,8 +40,8 @@ class _StartUpViewState extends State<StartUpView> {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 30,
-              vertical: 10,
+              horizontal: 24,
+              vertical: 16,
             ),
             child: Center(
               child: Builder(builder: (context) {
@@ -62,30 +62,24 @@ class _StartUpViewState extends State<StartUpView> {
                     Expanded(
                       child: ListView(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10.0,
-                              vertical: 8,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                StartUpLanguage(
-                                  iconLabel: controller.iconLabel,
-                                  controller: controller,
-                                  onChanged: (iconLabel) {
-                                    setState(() {
-                                      controller.onIconLabelChanged(iconLabel);
-                                      context.read<LocaleProvider>().setLocale(
-                                            Locale(
-                                              iconLabel.value,
-                                            ),
-                                          );
-                                    });
-                                  },
-                                )
-                              ],
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              StartUpLanguage(
+                                iconLabel: controller.iconLabel,
+                                controller: controller,
+                                onChanged: (iconLabel) {
+                                  setState(() {
+                                    controller.onIconLabelChanged(iconLabel);
+                                    context.read<LocaleProvider>().setLocale(
+                                          Locale(
+                                            iconLabel.value,
+                                          ),
+                                        );
+                                  });
+                                },
+                              )
+                            ],
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -121,9 +115,8 @@ class _StartUpViewState extends State<StartUpView> {
                               ),
                               const SizedBox(height: 20),
                               ElevatedButton(
-                                onPressed: () {
-                                  navigateTo(Routes.login, context);
-                                },
+                                onPressed: () =>
+                                    navigateTo(Routes.login, context),
                                 child: Text(language.acceder),
                               ),
                               const SizedBox(height: 20),
