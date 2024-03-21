@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1065123476454",
+    "project_id": "redem-9e143",
+    "storage_bucket": "redem-9e143.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1065123476454:android:fd9ce6e89255ab5a2c9c27",
+        "android_client_info": {
+          "package_name": "app.redem.ubu.tfg.gii202324"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBERA-OscGKMdJi-ExGUA9WOmO2Ecr5ojk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

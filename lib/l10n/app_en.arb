@@ -28,5 +28,43 @@
   "paciente": "Patient",
   "hombre": "Male",
   "mujer": "Female",
-  "otro": "Other"
+  "otro": "Other",
+  "sintomas": "Symptoms",
+  "emrr": "Relapsing-Remitting",
+  "emsp": "Secondary-Progressive",
+  "empp": "Primary-Progressive",
+  "empr": "Progressive-Recurrent",
+  "tipo_em": "Multiple Sclerosis Type",
+  "badRequest": "Bad request",
+  "unauthorized": "Unauthorized",
+  "forbidden": "Forbidden",
+  "notFound": "Not found",
+  "requestTimeout": "Request timeout",
+  "internalServerError": "Internal server error",
+  "serviceUnavailable": "Service unavailable",
+  "unknown": "Unknown",
+  "usuarioGuardado": "User saved successfully",
+  "leer_mas": "Read more",
+  "gestion_enfermedad": "Disease management",
+  "medicamentos": "Treatments",
+  "otras_gestiones": "Other managements",
+  "articulos": "Articles",
+  "categorias": "Categories",
+  "recetas": "Recipes",
+  "salir": "Log out",
+  "articulo": "Article",
+  "receta": "Recipe",
+  "aceptar": "Acept",
+  "cancelar": "Cancel",
+  "guardar": "Save",
+  "seguro_borrar": "Are you sure you want to delete {item}?",
+  "@seguro_borrar": {
+    "description": "A message with a single parameter",
+    "placeholders": {
+      "item": {
+        "type": "String",
+        "example": "Article"
+      }
+    }
+  }
 }

@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:jwt_decoder/jwt_decoder.dart';
+
 import '../../domain/models/typedefs.dart';
 import '../../domain/models/user/user.dart';
 import '../../domain/repository/user_repo.dart';
@@ -15,7 +17,7 @@ class UserRepoImpl implements UserRepo {
   final SessionService _sessionService;
 
   @override
-  Future<Result<User, Exception>> login(String email, String password) async {
+  Future<Result<User, int>> login(String email, String password) async {
     final loginResponse = await _api.login(
       email: email,
       password: password,
@@ -26,23 +28,23 @@ class UserRepoImpl implements UserRepo {
 
       if (json['token'] != null) {
         final token = json['token'];
+
+        final decodedToken = JwtDecoder.decode(token);
+        final role = decodedToken['role'];
+        await _sessionService.saveRole(role);
         await _sessionService.saveToken(token);
 
         return getUser();
       } else {
-        return Failure(Exception('Error al obtener el token'));
+        return Failure(loginResponse.statusCode);
       }
     }
 
-    return Failure(
-      Exception(
-        'Error ${loginResponse.statusCode} al obtener los datos del login',
-      ),
-    );
+    return Failure(loginResponse.statusCode);
   }
 
   @override
-  Future<Result<User, Exception>> signUp(String email, String password) async {
+  Future<Result<User, int>> signUp(String email, String password) async {
     final response = await _api.signUp(
       email: email,
       password: password,
@@ -51,16 +53,12 @@ class UserRepoImpl implements UserRepo {
     if (response.statusCode == HttpStatus.created) {
       return login(email, password);
     } else {
-      return Failure(
-        Exception(
-          'Error ${response.statusCode} al realizar el registro',
-        ),
-      );
+      return Failure(response.statusCode);
     }
   }
 
   @override
-  Future<Result<User, Exception>> getUser() async {
+  Future<Result<User, int>> getUser() async {
     final token = await _sessionService.token;
 
     final response = await _api.getUserInfo(token: token ?? '');
@@ -70,11 +68,7 @@ class UserRepoImpl implements UserRepo {
 
       return Success(User.fromJson(json['data']));
     } else {
-      return Failure(
-        Exception(
-          'Error ${response.statusCode} al obtener la información del usuario',
-        ),
-      );
+      return Failure(response.statusCode);
     }
   }
 
@@ -86,5 +80,41 @@ class UserRepoImpl implements UserRepo {
   @override
   Future<void> signOut() {
     return _sessionService.signOut();
+  }
+
+  @override
+  Future<Result<String, int>> saveUser(
+    String uuid,
+    String firstName,
+    String lastName,
+    String dateOfBirth,
+    String sex,
+    String email,
+    String userType,
+    String city,
+    String country,
+  ) async {
+    final token = await _sessionService.token;
+
+    final response = await _api.saveUser(
+      token: token ?? '',
+      uuid: uuid,
+      firstName: firstName,
+      lastName: lastName,
+      dateOfBirth: dateOfBirth,
+      sex: sex,
+      email: email,
+      userType: userType,
+      city: city,
+      country: country,
+    );
+
+    if (response.statusCode == HttpStatus.ok) {
+      final json = jsonDecode(response.body) as Json;
+
+      return Success(json['message']);
+    } else {
+      return Failure(response.statusCode);
+    }
   }
 }

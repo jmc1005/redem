@@ -1,13 +1,13 @@
-sealed class Result<S, E extends Exception> {
+sealed class Result<S, int> {
   const Result();
 }
 
-final class Success<S, E extends Exception> extends Result<S, E> {
+final class Success<S, int> extends Result<S, int> {
   const Success(this.value);
   final S value;
 }
 
-final class Failure<S, E extends Exception> extends Result<S, E> {
+final class Failure<S, int> extends Result<S, int> {
   const Failure(this.exception);
-  final E exception;
+  final int exception;
 }

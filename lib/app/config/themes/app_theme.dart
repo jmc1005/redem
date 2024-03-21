@@ -5,14 +5,9 @@ import '../colors/app_colors.dart';
 class AppTheme {
   ThemeData get light {
     return ThemeData(
-      appBarTheme: const AppBarTheme(
-        elevation: 0,
-        color: AppColors.primary,
-      ),
-      //scaffoldBackgroundColor: AppColors.primary,
       primaryColor: AppColors.primary,
       splashColor: Colors.transparent,
-      fontFamily: 'Hind',
+      fontFamily: 'Montserrat',
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppColors.primary,
         selectedItemColor: Colors.purple,
@@ -27,6 +22,13 @@ class AppTheme {
             borderRadius: BorderRadius.circular(8.0),
           ),
         ),
+      ),
+      scaffoldBackgroundColor: Colors.blueGrey[50],
+      primarySwatch: AppColors.from(AppColors.secondary),
+      colorScheme: ColorScheme.fromSwatch(
+        primarySwatch: AppColors.from(AppColors.secondary),
+        accentColor: const Color.fromARGB(255, 205, 62, 22),
+        backgroundColor: Colors.white,
       ),
     );
   }
