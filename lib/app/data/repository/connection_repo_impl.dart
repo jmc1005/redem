@@ -1,10 +1,10 @@
-import '../services/remote/check_connection.dart';
-import '../../domain/repository/connection_repo.dart';
+import 'dart:developer' as developer;
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 
-import 'dart:developer' as developer;
+import '../../domain/repository/connection_repo.dart';
+import '../services/remote/check_connection.dart';
 
 class ConnectionRepoImpl implements ConnectionRepo {
   ConnectionRepoImpl(this._connectivity, this._checkConnection);
@@ -23,7 +23,7 @@ class ConnectionRepoImpl implements ConnectionRepo {
 
       return _checkConnection.hasInternet();
     } on PlatformException catch (e) {
-      developer.log('Couldn\'t check connectivity status', error: e);
+      developer.log("Couldn't check connectivity status", error: e);
       return false;
     }
   }

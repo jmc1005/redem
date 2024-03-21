@@ -34,7 +34,7 @@
   "emsp": "Secundaria progresiva",
   "empp": "Primaria progresiva",
   "empr": "Progresiva-recurrente",
-  "tipo_em": "Tipo Esclerosis Multiple",
+  "tipo_em": "Tipo Esclerosis Múltiple",
   "badRequest": "Solicitud inválida",
   "unauthorized": "No autorizado",
   "forbidden": "No tiene permisos",
@@ -43,5 +43,28 @@
   "internalServerError": "Error interno del servidor",
   "serviceUnavailable": "Servicio no disponible",
   "unknown": "Desconocido",
-  "usuarioGuardado": "Usuario guardado con éxito"
+  "usuarioGuardado": "Usuario guardado con éxito",
+  "leer_mas": "Leer más",
+  "gestion_enfermedad": "Gestión Enfermedad",
+  "medicamentos": "Medicamentos",
+  "otras_gestiones": "Otras gestiones",
+  "articulos": "Artículos",
+  "categorias": "Categorías",
+  "recetas": "Recetas",
+  "salir": "Salir",
+  "articulo": "Artículo",
+  "receta": "Receta",
+  "aceptar": "Aceptar",
+  "cancelar": "Cancelar",
+  "guardar": "Guardar",
+  "seguro_borrar": "¿Seguro desea eliminar {item}?",
+  "@seguro_borrar": {
+    "description": "A message with a single parameter",
+    "placeholders": {
+      "item": {
+        "type": "String",
+        "example": "Artículo"
+      }
+    }
+  }
 }

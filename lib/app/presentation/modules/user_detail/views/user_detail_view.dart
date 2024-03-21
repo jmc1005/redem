@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../config/colors/app_colors.dart';
 import '../../../global/controllers/session_symptom_controller.dart';
 import '../../../global/controllers/session_user_controller.dart';
+import '../../../global/widgets/app_bar_widget.dart';
 import '../../../routes/app_routes.dart';
 import '../../../routes/routes.dart';
 import '../controller/user_detail_controller.dart';
@@ -36,8 +38,8 @@ class _UserDetailViewState extends State<UserDetailView> {
           deleteSymptoms: []),
       child: SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 80,
+          appBar: AppBarWidget(
+            asset: 'assets/images/redem_white.png',
             leading: IconButton(
               onPressed: () {
                 navigateTo(Routes.home, context);
@@ -47,11 +49,7 @@ class _UserDetailViewState extends State<UserDetailView> {
                 color: Colors.white,
               ),
             ),
-            title: Image.asset(
-              'assets/images/redem_white.png',
-              width: 56,
-            ),
-            centerTitle: true,
+            backgroundColor: AppColors.primary,
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),

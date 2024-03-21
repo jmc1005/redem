@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../config/colors/app_colors.dart';
 import '../../../global/controllers/session_user_controller.dart';
+import '../../../global/widgets/app_bar_widget.dart';
 import '../../../routes/app_routes.dart';
 import '../../../routes/routes.dart';
 import '../controller/home_controller.dart';
@@ -26,45 +28,39 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     final SessionUserController sessionUserController = context.read();
 
+    final List<Widget> actions = [
+      IconButton(
+        onPressed: () {
+          navigateTo(Routes.userDetail, context);
+        },
+        icon: const Icon(
+          Icons.person,
+          color: Colors.white,
+        ),
+      ),
+      IconButton(
+        onPressed: () {
+          sessionUserController.signOut();
+          navigateTo(Routes.startUp, context);
+        },
+        icon: const Icon(
+          Icons.logout,
+          color: Colors.white,
+        ),
+      ),
+    ];
+
     return ChangeNotifierProvider<HomeController>(
       create: (_) => HomeController(),
       child: Builder(builder: (context) {
         final controller = Provider.of<HomeController>(context);
         return Scaffold(
           backgroundColor: Colors.grey.shade100,
-          appBar: AppBar(
-            toolbarHeight: 80,
-            title: Image.asset(
-              'assets/images/redem_white.png',
-              width: 56,
-            ),
-            centerTitle: true,
-            actions: [
-              IconButton(
-                onPressed: () {
-                  navigateTo(Routes.userDetail, context);
-                },
-                icon: const Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  sessionUserController.signOut();
-                  navigateTo(Routes.startUp, context);
-                },
-                icon: const Icon(
-                  Icons.logout,
-                  color: Colors.white,
-                ),
-              ),
-            ],
+          appBar: AppBarWidget(
+            asset: 'assets/images/redem_white.png',
+            actions: actions,
+            backgroundColor: AppColors.primary,
           ),
-          // floatingActionButton: FloatingExpandMenu(
-          //   distance: 100,
-          //   children: controller.actionButtonList,
-          // ),
           bottomNavigationBar: BottomNavBar(
             onTap: (index) {
               //print(index);

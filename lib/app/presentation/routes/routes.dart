@@ -7,4 +7,6 @@ class Routes {
   static const home = '/home';
   static const userDetail = '/user-detail';
   static const admin = '/admin';
+  static const articles = '/articles';
+  static const articleDetail = '/article-detail';
 }

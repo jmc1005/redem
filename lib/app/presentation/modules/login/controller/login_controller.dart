@@ -36,7 +36,6 @@ class LoginController extends StateNotifier<UserCredentialState> {
 
   Future<void> submit() async {
     final SessionUserController sessionController = context.read();
-    final role = await sessionController.sessionService.role;
     state = state.copyWith(loading: true);
 
     final result = await userRepo.login(
@@ -48,6 +47,8 @@ class LoginController extends StateNotifier<UserCredentialState> {
       Failure(exception: final exception) => exception,
       Success(value: final User user) => user
     };
+
+    final role = await sessionController.sessionService.role;
 
     if (value is User) {
       sessionController.user = value;

@@ -111,7 +111,7 @@ class _SymptomData extends State<SymptomData> {
               );
             }
           } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            const Center(child: CircularProgressIndicator());
           }
 
           return const Text('Error');

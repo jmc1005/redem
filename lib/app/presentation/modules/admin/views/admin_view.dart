@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../config/colors/app_colors.dart';
+import '../../../global/controllers/session_user_controller.dart';
 import '../../../global/widgets/cabecera_widget.dart';
 import '../../../global/widgets/gestion_widget.dart';
-import '../../../global/widgets/user_submit_button_widget.dart';
+import '../../../routes/app_routes.dart';
+import '../../../routes/routes.dart';
 
 class AdminView extends StatefulWidget {
   const AdminView({super.key});
@@ -15,9 +19,21 @@ class AdminView extends StatefulWidget {
 class _AdminViewState extends State<AdminView> {
   @override
   Widget build(BuildContext context) {
+    final SessionUserController sessionUserController = context.read();
+    final language = AppLocalizations.of(context)!;
+
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          sessionUserController.signOut();
+          navigateTo(Routes.startUp, context);
+        },
+        child: const Icon(
+          Icons.exit_to_app,
+        ),
+      ),
       body: Container(
-        padding: const EdgeInsets.symmetric(vertical: 38, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
         child: Column(
           children: [
             Container(
@@ -34,7 +50,7 @@ class _AdminViewState extends State<AdminView> {
               ),
               child: Padding(
                 padding: const EdgeInsetsDirectional.symmetric(
-                  vertical: 8,
+                  vertical: 12,
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
@@ -48,7 +64,7 @@ class _AdminViewState extends State<AdminView> {
               ),
             ),
             const SizedBox(
-              height: 8,
+              height: 16,
             ),
             Expanded(
               child: Align(
@@ -69,29 +85,87 @@ class _AdminViewState extends State<AdminView> {
                               maxWidth: 360,
                             ),
                             decoration: const BoxDecoration(),
-                            child: const Column(
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                CabeceraWidget(
-                                  label: 'Gestión Enfermedad',
-                                  color: Color(0xFF606A85),
-                                ),
-                                GestionWidget(
-                                    label: 'Tipos esclerosis múltiples'),
-                                GestionWidget(label: 'Síntomas'),
-                                GestionWidget(label: 'Medicamentos'),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.only(
-                                    top: 8,
+                                Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        blurRadius: 3,
+                                        color: Color(0x33000000),
+                                        offset: Offset(0, 1),
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: CabeceraWidget(
-                                    label: 'Otras Gestiones',
-                                    color: AppColors.cabeceraAdmin,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0,
+                                      vertical: 16,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        CabeceraWidget(
+                                          label: language.gestion_enfermedad,
+                                          color: const Color(0xFF606A85),
+                                        ),
+                                        GestionWidget(
+                                          label: language.tipo_em,
+                                        ),
+                                        GestionWidget(
+                                          label: language.sintomas,
+                                        ),
+                                        GestionWidget(
+                                          label: language.medicamentos,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                GestionWidget(label: 'Artículos'),
-                                GestionWidget(label: 'Categorías'),
-                                GestionWidget(label: 'Recetas'),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        blurRadius: 3,
+                                        color: Color(0x33000000),
+                                        offset: Offset(0, 1),
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0,
+                                      vertical: 16,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        CabeceraWidget(
+                                          label: language.otras_gestiones,
+                                          color: AppColors.cabeceraAdmin,
+                                        ),
+                                        GestionWidget(
+                                          label: language.articulos,
+                                          onTap: () {
+                                            navigateTo(
+                                                Routes.articles, context);
+                                          },
+                                        ),
+                                        GestionWidget(
+                                            label: language.categorias),
+                                        GestionWidget(label: language.recetas),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -102,24 +176,6 @@ class _AdminViewState extends State<AdminView> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            Align(
-              alignment: AlignmentDirectional.topCenter,
-              child: SizedBox(
-                width: 130,
-                child: ElevatedButton(
-                  onPressed: () {
-                    print('Button pressed ...');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.secondary,
-                  ),
-                  child: const Text('Log Out'),
-                ),
-              ),
-            )
           ],
         ),
       ),
