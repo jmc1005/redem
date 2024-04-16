@@ -9,17 +9,22 @@ import '../../routes/routes.dart';
 import '../dialogs/dialog_confirm.dart';
 
 class ItemWidget extends StatelessWidget {
-  const ItemWidget(
-      {super.key,
-      required this.showMedia,
-      required this.media,
-      required this.title,
-      required this.content});
+  const ItemWidget({
+    super.key,
+    required this.editMode,
+    required this.showMedia,
+    required this.media,
+    required this.title,
+    required this.content,
+    this.onTap,
+  });
 
+  final bool editMode;
   final bool showMedia;
   final String? media;
   final String title;
   final String content;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +68,7 @@ class ItemWidget extends StatelessWidget {
     ];
 
     return GestureDetector(
-      onTap: () {
-        navigateTo(Routes.articleDetail, context);
-      },
+      onTap: onTap,
       child: Row(
         children: [
           if (showMedia)

@@ -1,19 +1,31 @@
-import 'dart:io';
-
-import 'package:http/http.dart';
-
-import '../../http/api.dart';
+import '../../../domain/models/typedefs.dart';
+import '../../firebase/firebase_service.dart';
 
 class ArticleApi {
-  final Api _api;
+  final FirebaseService _firebaseService;
 
-  ArticleApi(this._api);
+  ArticleApi(this._firebaseService);
 
-  final String uri = '/articles';
+  final String collection = 'articles';
 
-  Future<Response> getAll({required String token}) {
-    final headers = {HttpHeaders.authorizationHeader: token};
+  Future<List<Json>> getAll() {
+    return _firebaseService.getFromCollection(
+      collectionPath: collection,
+    );
+  }
 
-    return _api.request(uri, headers: headers);
+  Future<Json> get(String documentPath) {
+    return _firebaseService.getFromDocument(
+      collectionPath: collection,
+      documentPath: documentPath,
+    );
+  }
+
+  Future<Json> set(Json data, String documentPath) {
+    return _firebaseService.setDataOnDocument(
+      data: data,
+      collection: collection,
+      documentPath: documentPath,
+    );
   }
 }

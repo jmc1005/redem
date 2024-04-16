@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
+import 'app/data/firebase/firebase_service.dart';
 import 'app/data/http/api.dart';
 import 'app/data/repository/article_repo_impl.dart';
 import 'app/data/repository/connection_repo_impl.dart';
@@ -28,10 +30,18 @@ import 'app_redem.dart';
 import 'firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   final sessionService = SessionService(const FlutterSecureStorage());
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  final firestore = FirebaseFirestore.instance;
+
+  firestore.settings = const Settings(
+    persistenceEnabled: true,
   );
 
   runApp(
@@ -68,10 +78,7 @@ void main() async {
         Provider<ArticleRepo>(
           create: (_) => ArticleRepoImpl(
             ArticleApi(
-              Api(
-                client: Client(),
-                baseUrl: AppConstants.baseUrl,
-              ),
+              FirebaseService(firestore: firestore),
             ),
             sessionService,
           ),
@@ -98,7 +105,7 @@ void main() async {
             articleRepo: context.read(),
             sessionService: sessionService,
           ),
-        )
+        ),
       ],
       child: const AppRedem(),
     ),

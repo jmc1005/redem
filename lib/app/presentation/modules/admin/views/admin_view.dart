@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../config/colors/app_colors.dart';
 import '../../../global/controllers/session_user_controller.dart';
@@ -47,6 +47,13 @@ class _AdminViewState extends State<AdminView> {
                 border: Border.all(
                   color: const Color(0xFFE5E7EB),
                 ),
+                boxShadow: const [
+                  BoxShadow(
+                    blurRadius: 3,
+                    color: Color(0x33000000),
+                    offset: Offset(0, 1),
+                  )
+                ],
               ),
               child: Padding(
                 padding: const EdgeInsetsDirectional.symmetric(

@@ -1,6 +1,10 @@
-import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:uuid/uuid.dart';
+
+import '../../domain/models/article/article.dart';
 import '../../domain/models/article_data/article_data.dart';
 import '../../domain/models/typedefs.dart';
 import '../../domain/repository/article_repo.dart';
@@ -15,38 +19,43 @@ class ArticleRepoImpl implements ArticleRepo {
   ArticleRepoImpl(this._api, this._sessionService);
 
   @override
-  Future<Result<ArticleData, int>> create() {
-    // TODO: implement create
-    throw UnimplementedError();
-  }
-
-  @override
   Future<Result<List<ArticleData>, int>> getAll() async {
-    final token = await _sessionService.token;
+    final List<ArticleData> list = [];
 
-    final response = await _api.getAll(token: token ?? '');
+    final articles = await _api.getAll();
 
-    if (response.statusCode == HttpStatus.ok) {
-      final json = jsonDecode(response.body) as Json;
-
-      final data = json['data'] as List;
-      final list = data.map((d) => ArticleData.fromJson(d));
-
-      return Success(list.toList());
-    } else {
-      return Failure(response.statusCode);
+    for (final element in articles) {
+      list.add(ArticleData.fromJson(element));
     }
+
+    log('getAll $list');
+    return Success(list);
   }
 
   @override
-  Future<Result<ArticleData, int>> remove(String uuid) {
-    // TODO: implement remove
-    throw UnimplementedError();
+  Future<Result<ArticleData, int>> get(String documentPath) async {
+    final article = await _api.get(documentPath);
+
+    log('get $article');
+    return Success(ArticleData.fromJson(article));
   }
 
   @override
-  Future<Result<ArticleData, int>> update(String uuid) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<Result<Json, int>> set(Json data) async {
+    const uuid = Uuid();
+    final uuidDoc = uuid.v1();
+
+    final article = data['article'];
+    article.update('uuid', (value) => uuidDoc);
+    article.update('created_at', (value) => DateTime.now().toString());
+
+    final json = await _api.set(data, uuidDoc);
+
+    log('set $json');
+    if (json.containsKey('success')) {
+      return Success(json);
+    } else {
+      return const Failure(500);
+    }
   }
 }

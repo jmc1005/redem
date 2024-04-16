@@ -26,6 +26,7 @@ class LoginView extends StatelessWidget with ValidatorMixin {
         userRepo: context.read(),
       ),
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20),

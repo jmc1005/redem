@@ -36,6 +36,22 @@ class UserCredentialWidget extends StatelessWidget with ValidatorMixin {
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             label: Text(language.email),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: Color(0xFFE5E7EB),
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: Color(0xFFE5E7EB),
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            filled: true,
+            fillColor: Colors.white,
           ),
           validator: emailValidator,
         ),
@@ -46,6 +62,22 @@ class UserCredentialWidget extends StatelessWidget with ValidatorMixin {
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
             label: Text(language.password),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: Color(0xFFE5E7EB),
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: Color(0xFFE5E7EB),
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            filled: true,
+            fillColor: Colors.white,
           ),
           validator: passwordValidator,
           obscureText: true,

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/tap_bounce_container.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../../../../provider/locale_provider.dart';
 import '../../../../config/colors/app_colors.dart';
 import '../../../../domain/repository/connection_repo.dart';
@@ -37,6 +40,7 @@ class _StartUpViewState extends State<StartUpView> {
     return ChangeNotifierProvider<StartUpController>(
       create: (_) => StartUpController(),
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(
@@ -49,12 +53,11 @@ class _StartUpViewState extends State<StartUpView> {
                 final language = AppLocalizations.of(context)!;
 
                 if (!hasInternet) {
-                  final snackBar = SnackBar(
-                    content: Text(
-                      language.sin_conexion,
-                    ),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  showTopSnackBar(Overlay.of(context),
+                      CustomSnackBar.info(message: language.sin_conexion),
+                      dismissType: DismissType.onSwipe,
+                      dismissDirection: [DismissDirection.endToStart],
+                      snackBarPosition: SnackBarPosition.bottom);
                 }
 
                 return Column(

@@ -19,7 +19,7 @@ Map<String, Widget Function(BuildContext)> get appRoutes {
     Routes.home: (context) => const HomeView(),
     Routes.admin: (context) => const AdminView(),
     Routes.articles: (context) => const ArticlesView(),
-    Routes.articleDetail: (context) => const ArticleDetailView(),
+    Routes.articleDetail: (context) => const ArticleDetailView(editMode: true),
   };
 }
 

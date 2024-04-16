@@ -2,6 +2,9 @@ import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/tap_bounce_container.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../../../data/http/result.dart';
 import '../../../../utils/enums/em.dart';
@@ -293,7 +296,10 @@ class UserDetailController extends foundation.ChangeNotifier {
   void mostrarSuccess() {
     final language = AppLocalizations.of(context)!;
 
-    final snackBar = SnackBar(content: Text(language.usuarioGuardado));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    showTopSnackBar(Overlay.of(context),
+        CustomSnackBar.success(message: language.usuarioGuardado),
+        dismissType: DismissType.onSwipe,
+        dismissDirection: [DismissDirection.endToStart],
+        snackBarPosition: SnackBarPosition.bottom);
   }
 }

@@ -31,6 +31,7 @@ class _SignUpViewState extends State<SignUpView> with ValidatorMixin {
         context: context,
       ),
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: SafeArea(
           child: Form(
             key: _formKey,

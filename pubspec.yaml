@@ -31,12 +31,12 @@ dependencies:
   flutter:
     sdk: flutter
 
-  connectivity_plus: ^5.0.2
+  connectivity_plus: ^6.0.1
   http: ^1.1.0
   flutter_secure_storage: ^9.0.0
   flutter_svg: ^2.0.9
   provider: ^6.1.1
-  intl: ^0.18.1
+  intl: 0.18.1
   country_flags: ^2.2.0
   faker: ^2.1.0
   equatable: ^2.0.5
@@ -47,6 +47,8 @@ dependencies:
   border_bottom_navigation_bar: ^0.0.4
   multi_dropdown: ^2.1.4
   jwt_decoder: ^2.0.1
+  top_snackbar_flutter: ^3.1.0
+  quill_html_editor: ^2.2.8
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -59,9 +61,12 @@ dependencies:
   split_view: ^3.2.1
   csc_picker: ^0.2.7
   flutter_custom_selector: ^0.0.3
-  firebase_core: ^2.27.1
-  firebase_storage: ^11.6.10
-  cloud_firestore: ^4.15.9
+  firebase_core: ^2.25.1
+  firebase_storage: ^11.6.11
+  cloud_firestore: ^4.15.0
+  uuid: ^4.3.2
+  fake_cloud_firestore: ^2.4.8
+  test: 1.24.9
 
 dev_dependencies:
   flutter_test:
@@ -85,6 +90,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    # - .env
     - assets/images/redem.png
     - assets/images/redem_white.png
 

@@ -1,4 +1,7 @@
 import 'dart:io';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/tap_bounce_container.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -36,8 +39,11 @@ class HttpResponse {
   }
 
   void showError() {
-    final labelError = error;
-    final snackBar = SnackBar(content: Text(labelError));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    showTopSnackBar(
+      Overlay.of(context),
+      CustomSnackBar.error(message: error),
+      dismissType: DismissType.onSwipe,
+      dismissDirection: [DismissDirection.endToStart],
+    );
   }
 }

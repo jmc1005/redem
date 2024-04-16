@@ -66,5 +66,7 @@
         "example": "Article"
       }
     }
-  }
+  },
+  "titulo": "Title",
+  "ultima_actualizacion": "Last update"
 }
